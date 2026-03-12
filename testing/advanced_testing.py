@@ -35,8 +35,11 @@ We should record all these parameters in a dataframe and later find out if it's 
 """;
 
 # %% Define some simple test prompts (we'll just reuse the already created ones)
-def chat_completion_benchmark(model: Llama, content: str): # -> str:
-    chat_completion = models[model].create_chat_completion(
+def chat_completion_benchmark(model, content: str): # -> str:
+    benchmarks = pd.DataFrame()
+
+    start_time = time.perf_counter()
+    chat_completion = model.create_chat_completion(
         messages=[
             {
                 "role": "user",
@@ -44,18 +47,10 @@ def chat_completion_benchmark(model: Llama, content: str): # -> str:
             }
         ]
     )
-    return chat_completion
+    elapsed_time = time.perf_counter() - start_time
+    print(benchmarks.head(3))
 
-
-
-prompt_medium_universe = models["0.5B_ruvltra"].create_chat_completion(
-    messages=[
-        {
-            "role": "user",
-            "content": "Tell me some of the most interesting theories on the beginning of the universe"
-        }
-    ]
-)
+test = chat_completion_benchmark(models["0.5B_ruvltra"], "What is the capital of France?")
 
 
 
