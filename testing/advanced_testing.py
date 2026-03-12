@@ -39,6 +39,8 @@ def chat_completion_benchmark(model, content: str): # -> str:
     benchmarks = pd.DataFrame()
 
     start_time = time.perf_counter()
+
+    # Define time to completion
     chat_completion = model.create_chat_completion(
         messages=[
             {
@@ -48,7 +50,12 @@ def chat_completion_benchmark(model, content: str): # -> str:
         ]
     )
     elapsed_time = time.perf_counter() - start_time
-    print(benchmarks.head(3))
+
+    response = chat_completion["choices"][0]["message"]["content"]
+
+    print("Benchmark Data Frame:\n", benchmarks.head(3), "\n")
+    print("Elapsed Time: ", elapsed_time, " seconds\n")
+    print("Response:\n", response, "\n")
 
 test = chat_completion_benchmark(models["0.5B_ruvltra"], "What is the capital of France?")
 
