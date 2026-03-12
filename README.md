@@ -1,39 +1,7 @@
 # The Purpose
 
-I want a local LLM research assistant that runs smoothly on **Apple M4 silicone**. We'll make a bunch of tools and stuff like that for it to work well.
+I want a local LLM research assistant that runs smoothly on **Apple M4 silicone**. We'll make a bunch of tools and stuff like that for it to work well. I think AI is best used for gathering information and presenting it to you. It's up to the user to actually investigate and understand their desired material. 
 
-I mostly use AI for doing large web searches and summarizing the results with links, so that's what this thing is gonna be designed for.
+So, if I can find a model that runs smoothly on Apply M4 Silicone through this testing, I might not need to pay for AI subscriptions anymore.
 
-I think AI is best used for gathering information and presenting it to you. It's up to the user to actually investigate and understand their desired material.
-
-If this works well, I won't need to pay for AI subs anymore!
-
-Below are some temporary notes:
-
-# Why llama.cpp is a pain in the *** to run on Apple Silicone
-
-[Medium Article](https://medium.com/@akdemir_bahadir/how-to-build-and-install-llama-cpp-python-on-apple-silicon-without-losing-your-mind-96d186f86d73)
-
-"The main culprit behind these build failures is architecture confusion. Apple Silicon Macs can run both ARM64 (native) and x86_64 (through Rosetta) code, but your build tools need to speak the same language. When they don’t, chaos ensues."
-
-Here's how you confirm you are running native ARM64 architecture and not in [Rosetta](https://en.wikipedia.org/wiki/Rosetta_(software)) mode.
-
-```terminal
-uname -m                          # Should output: arm64
-sysctl -n sysctl.proc_translated  # Should output: 0 (not translated)
-```
-
-# Clean Your Environment
-
-After creating an env, clean it:
-
-```
-unset CPATH CPLUS_INCLUDE_PATH C_INCLUDE_PATH SDKROOT CC CXX CFLAGS CXXFLAGS MACOSX_DEPLOYMENT_TARGET
-```
-
-# Verify C++ Headers
-```terminal
-ls "$(xcrun --show-sdk-path)"/usr/include/c++/v1/{mutex,initializer_list,cstdint}
-```
-
-If these files exist, you're all good.
+Thus, this project benchmarks a bunch of local models in preparation for that application.
