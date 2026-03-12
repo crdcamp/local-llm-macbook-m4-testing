@@ -3,10 +3,13 @@
 # %% Imports
 from tabnanny import verbose
 import llama_cpp
-print("🎉 llama-cpp-python version:", llama_cpp.__version__)
+import time
+print("llama-cpp-python version:", llama_cpp.__version__)
 from llama_cpp import Llama
 
 # %% Load Model
+# Mac needs a gguf format (I think)
+# This is only a 0.5b parameter model. He's not the smartest.
 llm = Llama.from_pretrained(
 	repo_id="ruv/ruvltra-claude-code",
 	filename="ruvltra-claude-code-0.5b-q4_k_m.gguf",
@@ -16,6 +19,7 @@ llm = Llama.from_pretrained(
 # LLM SPEED TEST
 # %% Test respone1
 # Simple Question.
+start1 = time.perf_counter()
 response1 = llm.create_chat_completion(
     messages=[
         {
@@ -24,10 +28,13 @@ response1 = llm.create_chat_completion(
         }
     ]
 )
+elapsed1 = time.perf_counter() - start1
 print(response1["choices"][0]["message"]["content"])
+print(f"\nresponse1 took {elapsed1:.3f}s")
 
 # %% Test response2
 # Slightly more interesting question
+start2 = time.perf_counter()
 response2 = llm.create_chat_completion(
     messages=[
         {
@@ -36,5 +43,7 @@ response2 = llm.create_chat_completion(
         }
     ]
 )
-
+elapsed2 = time.perf_counter() - start2
 print(response2["choices"][0]["message"]["content"])
+print(f"\nresponse2 took {elapsed2:.3f}s")
+# Kinda dumb responses, but pretty darn quick. Let's test a bigger model (no reasoning)
