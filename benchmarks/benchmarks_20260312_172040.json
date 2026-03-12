@@ -1,8 +1,8 @@
 [
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 1.3832248329999857,
-    "tokens_per_second": 135.19132648481155,
+    "elapsed_time": 1.3979420000000573,
+    "tokens_per_second": 133.76806763084042,
     "prompt_tokens": 37,
     "completion_tokens": 187,
     "total_tokens": 224,
@@ -11,8 +11,8 @@
   },
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 2.9173539170001277,
-    "tokens_per_second": 133.34000984015097,
+    "elapsed_time": 3.15304712499983,
+    "tokens_per_second": 123.37271996847208,
     "prompt_tokens": 46,
     "completion_tokens": 389,
     "total_tokens": 435,
@@ -21,8 +21,8 @@
   },
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 0.12768941700005598,
-    "tokens_per_second": 54.820518132657234,
+    "elapsed_time": 0.11634854199974143,
+    "tokens_per_second": 60.16405431204765,
     "prompt_tokens": 26,
     "completion_tokens": 7,
     "total_tokens": 33,
@@ -31,8 +31,8 @@
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 67.51505699999962,
-    "tokens_per_second": 5.732054702997617,
+    "elapsed_time": 84.347881916,
+    "tokens_per_second": 4.588141293048755,
     "prompt_tokens": 26,
     "completion_tokens": 387,
     "total_tokens": 413,
@@ -41,18 +41,18 @@
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 91.54015762500012,
-    "tokens_per_second": 5.210827820005072,
+    "elapsed_time": 171.29197183299993,
+    "tokens_per_second": 3.6662547186523415,
     "prompt_tokens": 35,
-    "completion_tokens": 477,
-    "total_tokens": 512,
+    "completion_tokens": 628,
+    "total_tokens": 663,
     "prompt": "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?",
-    "response": "The epistemological foundations of Bayesian and frequentist statistics are indeed fundamentally different, leading to distinct interpretations of statistical concepts and procedures. \n\nHere's a breakdown of their core disagreements:\n\n**1. Nature of Probability:**\n\n* **Bayesian:** Treats probability as a measure of **degree of belief** or **subjective confidence** in a hypothesis or event. Probabilities are updated based on new evidence using Bayes' Theorem.\n* **Frequentist:** Views probability as a **long-run frequency** of an event occurring in repeated experiments or sampling. Probabilities are calculated based on the observed frequency of events in a specific sample.\n\n**2. Nature of Statistical Significance:**\n\n* **Bayesian:** Focuses on **posterior probabilities**, which reflect the updated belief about a hypothesis after considering the data. A hypothesis is considered \"supported\" by the data if its posterior probability is high.\n* **Frequentist:** Emphasizes **p-values**, which represent the probability of observing data as extreme as the observed data, assuming the null hypothesis is true. A p-value below a pre-defined threshold (e.g., 0.05) is often interpreted as evidence against the null hypothesis.\n\n**3. Estimation:**\n\n* **Bayesian:** Uses **Bayesian inference** to estimate parameters, incorporating prior beliefs about the parameter and updating them based on the data. This results in a **probability distribution** for the parameter.\n* **Frequentist:** Employs **point estimation** techniques to estimate parameters, aiming to find the \"best\" single value that minimizes the risk of making a wrong decision.\n\n**4. Hypothesis Testing:**\n\n* **Bayesian:** Views hypothesis testing as a process of **updating beliefs** about hypotheses based on data. Bayes' Theorem allows for direct comparison of the probabilities of different hypotheses.\n* **Frequentist:** Treats hypothesis testing as a **decision-making process** based on p-values. A decision is made to reject or fail to reject the null hypothesis based on the observed p-value.\n\n**Where the Disagreement is Genuine:**\n\nThe core disagreement stems from the different interpretations of probability. Bayesianism embraces subjective probabilities, while frequentism relies on objective frequencies. This leads to different approaches to data analysis and interpretation.\n\n**Where the Disagreement is Mostly Philosophical:**\n\n* **Objectivity vs."
+    "response": "The epistemological foundations of Bayesian and frequentist statistics are indeed fundamentally different, leading to distinct interpretations of statistical concepts and procedures. \n\nHere's a breakdown of their core disagreements:\n\n**1. Nature of Probability:**\n\n* **Bayesian:** Treats probability as a measure of **degree of belief** or **subjective confidence** in a hypothesis or event. Probabilities are updated based on new evidence using Bayes' Theorem.\n* **Frequentist:** Views probability as a **long-run frequency** of an event occurring in repeated experiments or sampling. Probabilities are calculated based on the observed frequency of events in a specific sample.\n\n**2. Nature of Statistical Significance:**\n\n* **Bayesian:** Focuses on **posterior probabilities**, which reflect the updated belief about a hypothesis after considering the data. A hypothesis is considered \"supported\" by the data if its posterior probability is high.\n* **Frequentist:** Emphasizes **p-values**, which represent the probability of observing data as extreme as the observed data, assuming the null hypothesis is true. A p-value below a pre-defined threshold (e.g., 0.05) is often interpreted as evidence against the null hypothesis.\n\n**3. Estimation:**\n\n* **Bayesian:** Uses **Bayesian inference** to estimate parameters, incorporating prior beliefs about the parameter and updating them based on the data. This results in a **probability distribution** for the parameter.\n* **Frequentist:** Employs **point estimation** techniques to estimate parameters, aiming to find the \"best\" single value that minimizes the risk of making a wrong decision.\n\n**4. Hypothesis Testing:**\n\n* **Bayesian:** Views hypothesis testing as a process of **updating beliefs** about hypotheses based on data. Bayes' Theorem allows for direct comparison of the probabilities of different hypotheses.\n* **Frequentist:** Treats hypothesis testing as a **decision-making process** based on p-values. A decision is made to reject or fail to reject the null hypothesis based on the observed p-value.\n\n**Where the Disagreement is Genuine:**\n\nThe core disagreement stems from the different interpretations of probability. Bayesianism embraces subjective probabilities, while frequentism relies on objective frequencies. This leads to different approaches to data analysis and interpretation.\n\n**Where the Disagreement is Mostly Philosophical:**\n\n* **Objectivity vs. Subjectivity:** The debate about the nature of probability is ultimately a philosophical one. Bayesians argue that probabilities reflect our degrees of belief, while frequentists argue that probabilities are objective frequencies.\n* **Inductive vs. Deductive Reasoning:** Bayesian inference can be seen as a form of inductive reasoning, drawing conclusions about probabilities based on observed data. Frequentism, on the other hand, relies on deductive reasoning, applying probability rules to derive conclusions about observed data.\n\n**Conclusion:**\n\nThe epistemological foundations of Bayesian and frequentist statistics offer distinct perspectives on how we understand and interpret data. While their differences are rooted in fundamental disagreements about probability, the debate also involves philosophical considerations about objectivity, subjectivity, and the nature of scientific knowledge."
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 2.94368674999987,
-    "tokens_per_second": 3.3971005916306964,
+    "elapsed_time": 3.7829535830001078,
+    "tokens_per_second": 2.6434371399475127,
     "prompt_tokens": 16,
     "completion_tokens": 10,
     "total_tokens": 26,
