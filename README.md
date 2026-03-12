@@ -1,3 +1,9 @@
+# The Purpose
+
+I want a local LLM research assistant that runs smoothly on Apple M4 silicone. We'll make a bunch of tools and stuff like that for it to work well.
+
+I mostly use AI for doing large web searches and summarizing the results with links, so that's what this thing is gonna be designed for.
+
 # Why llama.cpp is a pain in the *** to run on Apple Silicone
 
 [Medium Article](https://medium.com/@akdemir_bahadir/how-to-build-and-install-llama-cpp-python-on-apple-silicon-without-losing-your-mind-96d186f86d73)
