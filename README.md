@@ -1,8 +1,12 @@
 # The Purpose
 
-I want a local LLM research assistant that runs smoothly on Apple M4 silicone. We'll make a bunch of tools and stuff like that for it to work well.
+I want a local LLM research assistant that runs smoothly on **Apple M4 silicone**. We'll make a bunch of tools and stuff like that for it to work well.
 
 I mostly use AI for doing large web searches and summarizing the results with links, so that's what this thing is gonna be designed for.
+
+I think AI is best used for gathering information and presenting it to you. It's up to the user to actually investigate and understand their desired material.
+
+If this works well, I won't need to pay for AI subs anymore!
 
 # Why llama.cpp is a pain in the *** to run on Apple Silicone
 
