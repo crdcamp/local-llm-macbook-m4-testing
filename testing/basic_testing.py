@@ -52,6 +52,7 @@ print(f"\nresponse2 took {elapsed2:.3f}s")
 llm9B = Llama.from_pretrained(
 	repo_id="bartowski/gemma-2-9b-it-GGUF",
 	filename="gemma-2-9b-it-IQ2_M.gguf",
+	verbose=False
 )
 
 # %% Test response1
