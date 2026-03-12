@@ -5,7 +5,7 @@ import time
 import json
 from datetime import datetime
 
-# Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
+# Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=downloads
 
 # %% Define folder and file structure
 benchmark_dir = "benchmarks"
@@ -27,20 +27,19 @@ models = {
         filename="gemma-2-9b-it-IQ2_M.gguf",
         verbose=verbose_param,
         n_ctx=context_window
-    )
+    ),
+
 }
 print()
 
 # %% Chat completions benchmarks function
 benchmarks = []
 
-def chat_completion_benchmark(model: str, content: str): # -> str:
-    # Define model parameters for shell commands
+def chat_completion_benchmark(model: str, content: str):
     model_object = models[model]
     model_filename = os.path.basename(model_object.model_path)
 
     start_time = time.perf_counter()
-    # Define time to completion
     chat_completion = model_object.create_chat_completion(
         messages=[
             {
@@ -80,7 +79,7 @@ for model in models:
     hard_prompt = chat_completion_benchmark(model, "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?")
 
 benchmarks.sort(key=lambda x: x["tokens_per_second"], reverse=True)
-print(json.dumps(benchmarks, indent=2))
+print("Benchmark Results:\n", json.dumps(benchmarks, indent=2))
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
