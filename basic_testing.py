@@ -1,4 +1,7 @@
-# !pip install llama-cpp-python
+"""
+This is just to get a general structure of how to approach the model testing
+and benchmarking.
+"""
 
 # %% Imports
 from llama_cpp import Llama
