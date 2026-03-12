@@ -53,7 +53,8 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
                 "role": "user",
                 "content": content
             }
-        ]
+        ],
+        stream=False
     )
 
     # Temporary testing for storing results
@@ -61,15 +62,15 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
     elapsed_time = time.perf_counter() - start_time
     response = chat_completion["choices"][0]["message"]["content"]
 
-    # Get llama-bench results
+    # Get llama-bench results (we'll just start with basic metrics)
     usage = chat_completion["usage"]
-    tokens_generated = usage["completion_tokens"]
-    tps = tokens_generated / elapsed_time
+    tps = usage["completion_tokens"] / elapsed_time # Tokens per second
 
     print("Model: ", model)
-    print("Tokens per second: ", tps, "\n")
-    #print("Benchmark Data Frame:\n", benchmarks.head(3), "\n")
     print("Elapsed Time: ", elapsed_time, " seconds\n")
+    print("Usage: ", usage)
+    print("Tokens per second: ", tps)
     print("Response:\n", response, "\n")
+    print(usage)
 
 test = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
