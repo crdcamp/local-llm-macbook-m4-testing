@@ -1,14 +1,39 @@
 # %% Imports
-from pyexpat import model
 from llama_cpp import Llama
 import os
+import pandas as pd
 import time
 
-# %% Define folder structure
+# %% Define folder and file structure
 model_output_dir = "testing/model_outputs"
 os.makedirs(model_output_dir, exist_ok=True)
 
-# %% Figure out what metrics we need
-"""
+# %% Define models
+verbose_param = False
 
+models = {
+    "0.5B_ruvltra": Llama.from_pretrained(
+        repo_id="ruv/ruvltra-claude-code",
+        filename="ruvltra-claude-code-0.5b-q4_k_m.gguf",
+        verbose=verbose_param
+    ),
+    "9B_gemma_2": Llama.from_pretrained(
+        repo_id="bartowski/gemma-2-9b-it-GGUF",
+        filename="gemma-2-9b-it-IQ2_M.gguf",
+        verbose=verbose_param
+    )
+}
+# Define benchmarks needed
 """
+llama-bench is what we need. Here are some basic metrics:
+    * tokens per second: generation speed
+    * time to first token: milliseconds before output starts
+    * time per prompt token: how long each input token takes to process
+    * end-to-end time to first token: similar to time to first token but measures from the client side
+""";
+
+# %% Define some simple test prompts
+
+# %% Figure out how to use llama-bench and how to record metrics
+
+# Small test model (from `basic_testing.py)
