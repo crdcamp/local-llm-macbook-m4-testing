@@ -4,6 +4,8 @@ import os
 import pandas as pd
 import time
 
+# Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
+
 # %% Define folder and file structure
 model_output_dir = "testing/model_outputs"
 os.makedirs(model_output_dir, exist_ok=True)
@@ -35,9 +37,7 @@ We should record all these parameters in a dataframe and later find out if it's 
 """;
 
 # %% Define some simple test prompts (we'll just reuse the already created ones)
-def chat_completion_benchmark(model, content: str): # -> str:
-    benchmarks = pd.DataFrame()
-
+def chat_completion_benchmark(model: Llama, content: str): # -> str:
     start_time = time.perf_counter()
 
     # Define time to completion
@@ -49,8 +49,10 @@ def chat_completion_benchmark(model, content: str): # -> str:
             }
         ]
     )
-    elapsed_time = time.perf_counter() - start_time
 
+    # Temporary testing for storing results
+    benchmarks = pd.DataFrame()
+    elapsed_time = time.perf_counter() - start_time
     response = chat_completion["choices"][0]["message"]["content"]
 
     print("Benchmark Data Frame:\n", benchmarks.head(3), "\n")
@@ -58,9 +60,3 @@ def chat_completion_benchmark(model, content: str): # -> str:
     print("Response:\n", response, "\n")
 
 test = chat_completion_benchmark(models["0.5B_ruvltra"], "What is the capital of France?")
-
-
-
-# %% Figure out how to use llama-bench and how to record metrics
-
-# Small test model (from `basic_testing.py)
