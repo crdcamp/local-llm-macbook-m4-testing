@@ -67,4 +67,9 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
 
 
 print()
-test = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
+
+for model in models:
+    easy_prompt = chat_completion_benchmark(model, "What is the capital of France?")
+
+benchmarks.sort(key=lambda x: x["elapsed_time"])
+print(benchmarks)
