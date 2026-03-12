@@ -1,8 +1,8 @@
 [
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 1.4070704589998968,
-    "tokens_per_second": 132.90023879323994,
+    "elapsed_time": 1.3832248329999857,
+    "tokens_per_second": 135.19132648481155,
     "prompt_tokens": 37,
     "completion_tokens": 187,
     "total_tokens": 224,
@@ -11,8 +11,8 @@
   },
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 3.0246843330000956,
-    "tokens_per_second": 128.6084619660665,
+    "elapsed_time": 2.9173539170001277,
+    "tokens_per_second": 133.34000984015097,
     "prompt_tokens": 46,
     "completion_tokens": 389,
     "total_tokens": 435,
@@ -21,8 +21,8 @@
   },
   {
     "model": "0.5B_ruvltra",
-    "elapsed_time": 0.13405079199992542,
-    "tokens_per_second": 52.21901262622823,
+    "elapsed_time": 0.12768941700005598,
+    "tokens_per_second": 54.820518132657234,
     "prompt_tokens": 26,
     "completion_tokens": 7,
     "total_tokens": 33,
@@ -31,8 +31,8 @@
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 67.6704545839998,
-    "tokens_per_second": 5.718891684399936,
+    "elapsed_time": 67.51505699999962,
+    "tokens_per_second": 5.732054702997617,
     "prompt_tokens": 26,
     "completion_tokens": 387,
     "total_tokens": 413,
@@ -41,8 +41,8 @@
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 98.76106333300004,
-    "tokens_per_second": 4.829838641891325,
+    "elapsed_time": 91.54015762500012,
+    "tokens_per_second": 5.210827820005072,
     "prompt_tokens": 35,
     "completion_tokens": 477,
     "total_tokens": 512,
@@ -51,8 +51,8 @@
   },
   {
     "model": "9B_gemma_2",
-    "elapsed_time": 3.0545475419999093,
-    "tokens_per_second": 3.273807286513106,
+    "elapsed_time": 2.94368674999987,
+    "tokens_per_second": 3.3971005916306964,
     "prompt_tokens": 16,
     "completion_tokens": 10,
     "total_tokens": 26,

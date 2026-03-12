@@ -8,11 +8,11 @@ from datetime import datetime
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
 
 # %% Define folder and file structure
-model_output_dir = "benchmarks"
-os.makedirs(model_output_dir, exist_ok=True)
+benchmark_dir = "benchmarks"
+os.makedirs(benchmark_dir, exist_ok=True)
 
 # %% Define models
-verbose_param = False
+verbose_param = True
 
 models = {
     "0.5B_ruvltra": Llama.from_pretrained(
@@ -81,9 +81,7 @@ print(json.dumps(benchmarks, indent=2))
 # Save benchmarks results with time/date stamp
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-output_path = os.path.join(model_output_dir, f"benchmarks_{timestamp}.json")
+output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
 
 with open(output_path, "w") as f:
     json.dump(benchmarks, f, indent=2)
-
-print(f"Saved to {output_path}")
