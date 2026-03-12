@@ -30,9 +30,34 @@ llama-bench is what we need. Here are some basic metrics:
     * time to first token: milliseconds before output starts
     * time per prompt token: how long each input token takes to process
     * end-to-end time to first token: similar to time to first token but measures from the client side
+
+We should record all these parameters in a dataframe and later find out if it's worth recording the prompt outputs
 """;
 
-# %% Define some simple test prompts
+# %% Define some simple test prompts (we'll just reuse the already created ones)
+def chat_completion_benchmark(model: Llama, content: str): # -> str:
+    chat_completion = models[model].create_chat_completion(
+        messages=[
+            {
+                "role": "user",
+                "content": content
+            }
+        ]
+    )
+    return chat_completion
+
+
+
+prompt_medium_universe = models["0.5B_ruvltra"].create_chat_completion(
+    messages=[
+        {
+            "role": "user",
+            "content": "Tell me some of the most interesting theories on the beginning of the universe"
+        }
+    ]
+)
+
+
 
 # %% Figure out how to use llama-bench and how to record metrics
 
