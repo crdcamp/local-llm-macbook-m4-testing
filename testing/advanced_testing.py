@@ -3,11 +3,12 @@ from llama_cpp import Llama
 import os
 import time
 import json
+from datetime import datetime
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
 
 # %% Define folder and file structure
-model_output_dir = "testing/model_outputs"
+model_output_dir = "benchmarks"
 os.makedirs(model_output_dir, exist_ok=True)
 
 # %% Define models
@@ -27,7 +28,7 @@ models = {
 }
 print()
 
-# %% Chat completions benchmarks
+# %% Chat completions benchmarks function
 benchmarks = []
 
 def chat_completion_benchmark(model: str, content: str): # -> str:
@@ -66,16 +67,23 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
     benchmarks.append(results)
     return results
 
-
 print()
 
-# Call function for easy, medium, and hard prompts
+# %% Call function for easy, medium, and hard prompts
 for model in models:
     easy_prompt = chat_completion_benchmark(model, "What is the capital of France?")
     medium_prompt = chat_completion_benchmark(model, "Summarize the main arguments for and against nuclear energy as a solution to climate change.")
     hard_prompt = chat_completion_benchmark(model, "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?")
 
-# Sort by `elapsed_time`: Most likely the best indicator for how demanding
-# the model is with my limited benchmarks
-benchmarks.sort(key=lambda x: x["elapsed_time"], reverse=True)
+
+benchmarks.sort(key=lambda x: x["tokens_per_second"], reverse=True)
 print(json.dumps(benchmarks, indent=2))
+# Save benchmarks results with time/date stamp
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+output_path = os.path.join(model_output_dir, f"benchmarks_{timestamp}.json")
+
+with open(output_path, "w") as f:
+    json.dump(benchmarks, f, indent=2)
+
+print(f"Saved to {output_path}")
