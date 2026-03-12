@@ -1,8 +1,9 @@
 # %% Imports
 from llama_cpp import Llama
 import os
-import pandas as pd
 import time
+import subprocess
+import pandas as pd
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
 
@@ -25,6 +26,7 @@ models = {
         verbose=verbose_param
     )
 }
+print()
 # Define benchmarks needed
 """
 llama-bench is what we need. Here are some basic metrics:
@@ -37,11 +39,15 @@ We should record all these parameters in a dataframe and later find out if it's 
 """;
 
 # %% Define some simple test prompts (we'll just reuse the already created ones)
-def chat_completion_benchmark(model: Llama, content: str): # -> str:
-    start_time = time.perf_counter()
+# llama-bench resource: https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench#syntax
+def chat_completion_benchmark(model: str, content: str): # -> str:
+    # Define model parameters for shell commands
+    model_object = models[model]
+    model_filename = os.path.basename(model_object.model_path)
 
+    start_time = time.perf_counter()
     # Define time to completion
-    chat_completion = model.create_chat_completion(
+    chat_completion = model_object.create_chat_completion(
         messages=[
             {
                 "role": "user",
@@ -51,12 +57,19 @@ def chat_completion_benchmark(model: Llama, content: str): # -> str:
     )
 
     # Temporary testing for storing results
-    benchmarks = pd.DataFrame()
+    #benchmarks = pd.DataFrame()
     elapsed_time = time.perf_counter() - start_time
     response = chat_completion["choices"][0]["message"]["content"]
 
-    print("Benchmark Data Frame:\n", benchmarks.head(3), "\n")
+    # Get llama-bench results
+    usage = chat_completion["usage"]
+    tokens_generated = usage["completion_tokens"]
+    tps = tokens_generated / elapsed_time
+
+    print("Model: ", model)
+    print("Tokens per second: ", tps, "\n")
+    #print("Benchmark Data Frame:\n", benchmarks.head(3), "\n")
     print("Elapsed Time: ", elapsed_time, " seconds\n")
     print("Response:\n", response, "\n")
 
-test = chat_completion_benchmark(models["0.5B_ruvltra"], "What is the capital of France?")
+test = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
