@@ -8,6 +8,8 @@ I think AI is best used for gathering information and presenting it to you. It's
 
 If this works well, I won't need to pay for AI subs anymore!
 
+Below are some temporary notes:
+
 # Why llama.cpp is a pain in the *** to run on Apple Silicone
 
 [Medium Article](https://medium.com/@akdemir_bahadir/how-to-build-and-install-llama-cpp-python-on-apple-silicon-without-losing-your-mind-96d186f86d73)
