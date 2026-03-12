@@ -2,6 +2,7 @@
 from llama_cpp import Llama
 import os
 import time
+import json
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
 
@@ -68,8 +69,13 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
 
 print()
 
+# Call function for easy, medium, and hard prompts
 for model in models:
     easy_prompt = chat_completion_benchmark(model, "What is the capital of France?")
+    medium_prompt = chat_completion_benchmark(model, "Summarize the main arguments for and against nuclear energy as a solution to climate change.")
+    hard_prompt = chat_completion_benchmark(model, "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?")
 
-benchmarks.sort(key=lambda x: x["elapsed_time"])
-print(benchmarks)
+# Sort by `elapsed_time`: Most likely the best indicator for how demanding
+# the model is with my limited benchmarks
+benchmarks.sort(key=lambda x: x["elapsed_time"], reverse=True)
+print(json.dumps(benchmarks, indent=2))
