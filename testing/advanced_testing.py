@@ -2,8 +2,6 @@
 from llama_cpp import Llama
 import os
 import time
-import subprocess
-import pandas as pd
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=trending
 
@@ -40,6 +38,9 @@ We should record all these parameters in a dataframe and later find out if it's 
 
 # %% Define some simple test prompts (we'll just reuse the already created ones)
 # llama-bench resource: https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench#syntax
+
+benchmarks = []
+
 def chat_completion_benchmark(model: str, content: str): # -> str:
     # Define model parameters for shell commands
     model_object = models[model]
@@ -66,11 +67,21 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
     usage = chat_completion["usage"]
     tps = usage["completion_tokens"] / elapsed_time # Tokens per second
 
-    print("Model: ", model)
-    print("Elapsed Time: ", elapsed_time, " seconds\n")
-    print("Usage: ", usage)
-    print("Tokens per second: ", tps)
-    print("Response:\n", response, "\n")
-    print(usage)
+    results = {
+        "model": model,
+        "elapsed_time": elapsed_time,
+        "tokens_per_second": tps,
+        "prompt_tokens": usage["prompt_tokens"],
+        "completion_tokens": usage["completion_tokens"],
+        "total_tokens": usage["total_tokens"],
+        "prompt": content,
+        "response": response
+    }
 
+    benchmarks.append(results)
+    return results
+
+
+print()
 test = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
+print(test)
