@@ -25,20 +25,8 @@ models = {
     )
 }
 print()
-# Define benchmarks needed
-"""
-llama-bench is what we need. Here are some basic metrics:
-    * tokens per second: generation speed
-    * time to first token: milliseconds before output starts
-    * time per prompt token: how long each input token takes to process
-    * end-to-end time to first token: similar to time to first token but measures from the client side
 
-We should record all these parameters in a dataframe and later find out if it's worth recording the prompt outputs
-""";
-
-# %% Define some simple test prompts (we'll just reuse the already created ones)
-# llama-bench resource: https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench#syntax
-
+# %% Chat completions benchmarks
 benchmarks = []
 
 def chat_completion_benchmark(model: str, content: str): # -> str:
@@ -57,13 +45,9 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
         ],
         stream=False
     )
-
-    # Temporary testing for storing results
-    #benchmarks = pd.DataFrame()
     elapsed_time = time.perf_counter() - start_time
-    response = chat_completion["choices"][0]["message"]["content"]
 
-    # Get llama-bench results (we'll just start with basic metrics)
+    response = chat_completion["choices"][0]["message"]["content"]
     usage = chat_completion["usage"]
     tps = usage["completion_tokens"] / elapsed_time # Tokens per second
 
@@ -84,4 +68,3 @@ def chat_completion_benchmark(model: str, content: str): # -> str:
 
 print()
 test = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
-print(test)
