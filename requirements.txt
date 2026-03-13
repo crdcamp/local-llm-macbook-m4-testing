@@ -19,8 +19,6 @@ cycler==0.12.1
 debugpy==1.8.17
 decorator==5.2.1
 diskcache==5.6.3
-# Editable install with no version control (epstein-files-downloader==1.0.0)
--e /Users/christiancamp/Desktop/epstein-files-downloader
 executing==2.2.1
 fastapi==0.121.3
 ffmpy==1.0.0
