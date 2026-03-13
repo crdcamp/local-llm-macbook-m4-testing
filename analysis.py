@@ -14,10 +14,11 @@ benchmarks["tokens_per_second"] = benchmarks["total_tokens"] / benchmarks["chat_
 #print(benchmarks)
 output_path = "benchmarks/benchmarks_test.csv"
 
-# %% Try grouping by prompt first
-prompt_group = benchmarks.groupby(["prompt"])
+# %% Group by model
+prompt_group = benchmarks.groupby(["model", "prompt"])
 #print(prompt_group.head())
 output_path = "testing/test.csv"
 
+
 # Only saves the "Captial of France" prompt
-print(prompt_group)
+print(prompt_group.head())
