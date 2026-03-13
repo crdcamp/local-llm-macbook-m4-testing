@@ -4,6 +4,8 @@ import os
 import time
 import json
 from datetime import datetime
+from numpy.typing import test
+import pandas as pd
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=downloads
 # Models can be deleted in ~/.cache/huggingface/hub/
@@ -65,14 +67,11 @@ models = {
 print()
 
 # %% Chat completions benchmarks function
-benchmarks = []
-
 def chat_completion_benchmark(model: str, content: str):
     # Add check for GGUF format
     print("Current model: ", model)
     print("Prompt: ", content)
     model_object = models[model]
-    model_filename = os.path.basename(model_object.model_path)
 
     start_time = time.perf_counter()
 
@@ -96,21 +95,25 @@ def chat_completion_benchmark(model: str, content: str):
     print("Tokens per second: ", tps)
     print("Total processing time: ", elapsed_time, "\n\n")
 
-    results = {
-        "model": model,
-        "elapsed_time": elapsed_time,
+    results = pd.DataFrame({"model": [model],
+        "elapsed_time": [elapsed_time],
         "tokens_per_second": tps,
         "prompt_tokens": usage["prompt_tokens"],
         "completion_tokens": usage["completion_tokens"],
         "total_tokens": usage["total_tokens"],
         "prompt": content,
-        "response": response
-    }
+        "response": response})
 
-    benchmarks.append(results)
+
     return results
 
 print()
+
+benchmarks = pd.DataFrame()
+test1 = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
+test2 = chat_completion_benchmark("0.5B_ruvltra", "What color is the sky?")
+benchmarks = pd.concat([test1, test2])
+print(benchmarks)
 
 # %% Call function for easy, medium, and hard prompts
 print("Running models and gathering benchmarks... (this will take a while)")
