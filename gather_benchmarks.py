@@ -4,6 +4,7 @@ import os
 import time
 import json
 from datetime import datetime
+import tqdm
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=downloads
 
@@ -35,21 +36,32 @@ models = {
         n_ctx=context_window
     ),
     "12B_gemma_3": Llama.from_pretrained(
-	repo_id="MaziyarPanahi/gemma-3-12b-it-GGUF",
-	filename="gemma-3-12b-it.Q2_K.gguf",
-    verbose=verbose_param,
-    n_ctx=context_window
+        repo_id="MaziyarPanahi/gemma-3-12b-it-GGUF",
+        filename="gemma-3-12b-it.Q2_K.gguf",
+        verbose=verbose_param,
+        n_ctx=context_window
     ),
     "9B_qwen_3.5_unsloth": Llama.from_pretrained(
-	repo_id="unsloth/Qwen3.5-9B-GGUF",
-	filename="Qwen3.5-9B-BF16.gguf",
-	verbose=verbose_param,
-    n_ctx=context_window
+        repo_id="Qwen/Qwen3-8B-GGUF",
+        filename="Qwen3-8B-Q4_K_M.gguf",
+        verbose=verbose_param,
+        n_ctx=context_window
+    ),
+    "8B_deepseek_unsloth": Llama.from_pretrained(
+        repo_id="unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF",
+        filename="DeepSeek-R1-0528-Qwen3-8B-BF16.gguf",
+        verbose=verbose_param,
+        n_ctx=context_window
+    ),
+    "7B_deepseek_chat_second_state": Llama.from_pretrained(
+        repo_id="second-state/Deepseek-LLM-7B-Chat-GGUF",
+        filename="deepseek-llm-7b-chat-Q2_K.gguf",
+        verbose=verbose_param,
+        n_ctx=context_window
     )
-    # Add deepseek
 }
 
-
+print("\nNumber of models: ", len(models))
 print()
 
 # %% Chat completions benchmarks function
@@ -74,7 +86,7 @@ def chat_completion_benchmark(model: str, content: str):
 
     response = chat_completion["choices"][0]["message"]["content"]
     usage = chat_completion["usage"]
-    tps = usage["completion_tokens"] / elapsed_time # Tokens per second
+    tps = usage["completion_tokens"] / elapsed_time # Tokens per second: Double check if you should use `total_tokens` instead
 
     results = {
         "model": model,
@@ -107,4 +119,4 @@ output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
 
 with open(output_path, "w") as f:
     json.dump(benchmarks, f, indent=2)
-print("Models are done and benchmarks have been saved")
+print("Done. Benchmarks have been saved to ", benchmark_dir)
