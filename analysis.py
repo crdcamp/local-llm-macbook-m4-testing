@@ -18,16 +18,18 @@ output_path = "benchmarks/benchmarks_test.csv"
 
 # %%
 model_names = benchmarks["model"].unique()
-print(type(model_names))
-print(model_names)
+#print(model_names)
 
-model_ruv_name = model_names[0]
-print(model_ruv)
-print()
+i = 0
+for model in model_names:
+    model_name = model_names[i]
+    #print(model_name)
 
-# Absolutely horrenduos way to do this
-benchmarks_ruv = benchmarks[benchmarks["model"] == ]
-benchmarks_8_qwen = benchmarks[benchmarks["model"] == model_ruv_name]
-# benchmarks_9_glm =
-# benchmarks_9_gemma =
-# benchmarks_deep =
+    i += 1
+
+# Absolutely horrendous way to do this
+benchmarks_ruv = benchmarks[benchmarks["model"] == "0.5B_ruvltra"]
+benchmarks_8_qwen = benchmarks[benchmarks["model"] == "8B_qwen_3"]
+benchmarks_9_glm = benchmarks[benchmarks["model"] == "9B_glm_4"]
+benchmarks_9_gemma = benchmarks[benchmarks["model"] == "9B_gemma_2"]
+benchmarks_deep = benchmarks[benchmarks["model"] == "7B_deepseek_chat_second_state"]
