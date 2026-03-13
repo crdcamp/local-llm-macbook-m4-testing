@@ -94,7 +94,7 @@ def chat_completion_benchmark(model: str, content: str):
     print("Response: ", response)
 
     usage = chat_completion["usage"]
-    tps = usage["total_tokens"] / chat_completion_time # Tokens per second: Double check if you should use `total_tokens` instead
+    tps = usage["total_tokens"] / chat_completion_time
     print("Tokens per second: ", tps)
     print("Total processing time: ", chat_completion_time, "\n\n")
 
@@ -127,3 +127,5 @@ benchmarks = pd.concat(all_results, ignore_index=True)
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 benchmarks_output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.csv")
 benchmarks.to_csv(benchmarks_output_path, index=False)
+
+pd.to_csv(benchmarks, index=False)

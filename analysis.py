@@ -1,11 +1,16 @@
 # %% Imports
-import os
-import json
 import pandas as pd
 
 # %% Open dat guy
-benchmark_dir = os.listdir("benchmarks")
-if len(benchmark_dir) == 0:
-    print("No benchmarks found.")
-else:
-    print(benchmark_dir)
+benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
+benchmarks = pd.read_csv(benchmarks_path)
+print(benchmarks.head(2))
+
+# %% Fix the tokens/second calculation
+"""
+This is just gonna be a rough draft for now.
+"""
+benchmarks["tokens_per_second"] = benchmarks["total_tokens"] / benchmarks["chat_completion_time"]
+print(benchmarks)
+output_path = "benchmarks/benchmarks_test.csv"
+benchmarks.to_csv(output_path, index=False)
