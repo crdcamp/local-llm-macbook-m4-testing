@@ -27,9 +27,14 @@ for model in model_names:
 
     i += 1
 
-# Absolutely horrendous way to do this
+# Absolutely horrendous way to do this. I'll get it right later
 benchmarks_ruv = benchmarks[benchmarks["model"] == "0.5B_ruvltra"]
 benchmarks_8_qwen = benchmarks[benchmarks["model"] == "8B_qwen_3"]
 benchmarks_9_glm = benchmarks[benchmarks["model"] == "9B_glm_4"]
 benchmarks_9_gemma = benchmarks[benchmarks["model"] == "9B_gemma_2"]
 benchmarks_deep = benchmarks[benchmarks["model"] == "7B_deepseek_chat_second_state"]
+
+output_path = "testing/ruv_results.csv"
+benchmarks_ruv.to_csv(output_path, index=False)
+
+# %% Now graph each of the results (gonna be pretty basic to start)
