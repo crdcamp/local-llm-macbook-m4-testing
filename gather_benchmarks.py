@@ -105,12 +105,6 @@ def chat_completion_benchmark(model: str, content: str):
 
 print()
 
-benchmarks = pd.DataFrame()
-test1 = chat_completion_benchmark("0.5B_ruvltra", "What is the capital of France?")
-test2 = chat_completion_benchmark("0.5B_ruvltra", "What color is the sky?")
-benchmarks = pd.concat([test1, test2])
-print(benchmarks)
-
 # %% Call function for easy, medium, and hard prompts
 print("Running models and gathering benchmarks... (this will take a while)")
 print()
