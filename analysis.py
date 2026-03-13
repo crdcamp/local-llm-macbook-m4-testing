@@ -38,3 +38,23 @@ output_path = "testing/ruv_results.csv"
 benchmarks_ruv.to_csv(output_path, index=False)
 
 # %% Now graph each of the results (gonna be pretty basic to start)
+
+# Bar chart for token usage
+# Show token usage for each prompt
+fig, ax = plt.subplots()
+total_tokens = benchmarks_8_qwen["total_tokens"]
+prompts = benchmarks_8_qwen["prompt"].unique() # Already in order from easy to hard. Add logic for this in future use case
+
+ax.bar(prompts, total_tokens)
+
+ax.set_title("Qwen 8B - Prompt Difficulty vs. Token Usage")
+ax.set_ylabel("Total Tokens")
+ax.set_xlabel("Prompt Difficulty")
+ax.set_xticks(range(len(prompts)))
+ax.set_xticklabels(["Easy", "Medium", "Hard"])
+
+plt.show();
+
+# Line chart for tokens vs. completion time
+
+# %% Now compile these graphs together
