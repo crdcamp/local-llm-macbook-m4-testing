@@ -23,6 +23,10 @@ models = {
         verbose=verbose_param,
         n_ctx=context_window
     ),
+    "8B_qwen_3": Llama.from_pretrained(
+	repo_id="Qwen/Qwen3-8B-GGUF",
+	filename="Qwen3-8B-Q4_K_M.gguf",
+    ),
     "9B_glm_4": Llama.from_pretrained(
         repo_id="bartowski/glm-4-9b-chat-1m-GGUF",
         filename="glm-4-9b-chat-1m-IQ2_M.gguf",
