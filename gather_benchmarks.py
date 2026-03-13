@@ -94,7 +94,7 @@ def chat_completion_benchmark(model: str, content: str):
     print("Response: ", response)
 
     usage = chat_completion["usage"]
-    tps = usage["completion_tokens"] / chat_completion_time # Tokens per second: Double check if you should use `total_tokens` instead
+    tps = usage["total_tokens"] / chat_completion_time # Tokens per second: Double check if you should use `total_tokens` instead
     print("Tokens per second: ", tps)
     print("Total processing time: ", chat_completion_time, "\n\n")
 
