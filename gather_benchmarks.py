@@ -22,20 +22,41 @@ models = {
         verbose=verbose_param,
         n_ctx=context_window
     ),
+    "9B_glm_4": Llama.from_pretrained(
+        repo_id="bartowski/glm-4-9b-chat-1m-GGUF",
+        filename="glm-4-9b-chat-1m-IQ2_M.gguf",
+        verbose=verbose_param,
+        n_ctx=context_window
+    ),
     "9B_gemma_2": Llama.from_pretrained(
         repo_id="bartowski/gemma-2-9b-it-GGUF",
         filename="gemma-2-9b-it-IQ2_M.gguf",
         verbose=verbose_param,
         n_ctx=context_window
     ),
-
+    "12B_gemma_3": Llama.from_pretrained(
+	repo_id="MaziyarPanahi/gemma-3-12b-it-GGUF",
+	filename="gemma-3-12b-it.Q2_K.gguf",
+    verbose=verbose_param,
+    n_ctx=context_window
+    ),
+    "9B_qwen_3.5_unsloth": Llama.from_pretrained(
+	repo_id="unsloth/Qwen3.5-9B-GGUF",
+	filename="Qwen3.5-9B-BF16.gguf",
+	verbose=verbose_param,
+    n_ctx=context_window
+    )
+    # Add deepseek
 }
+
+
 print()
 
 # %% Chat completions benchmarks function
 benchmarks = []
 
 def chat_completion_benchmark(model: str, content: str):
+    # Add check for GGUF format
     model_object = models[model]
     model_filename = os.path.basename(model_object.model_path)
 
