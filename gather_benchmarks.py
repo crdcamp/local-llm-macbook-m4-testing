@@ -23,7 +23,7 @@ models = {
         verbose=verbose_param,
         n_ctx=context_window
     ),
-    "8B_qwen_3": Llama.from_pretrained(
+    "8B_qwen_3": Llama.from_pretrained( # Tool/function calling
     	repo_id="Qwen/Qwen3-8B-GGUF",
     	filename="Qwen3-8B-Q4_K_M.gguf",
         verbose=verbose_param,
@@ -41,19 +41,20 @@ models = {
         verbose=verbose_param,
         n_ctx=context_window
     ),
-    "12B_gemma_3": Llama.from_pretrained(
-        repo_id="MaziyarPanahi/gemma-3-12b-it-GGUF",
-        filename="gemma-3-12b-it.Q2_K.gguf",
-        verbose=verbose_param,
-        n_ctx=context_window
-    ),
-    "9B_qwen_3.5_unsloth": Llama.from_pretrained(
-        repo_id="Qwen/Qwen3-8B-GGUF",
-        filename="Qwen3-8B-Q4_K_M.gguf",
-        verbose=verbose_param,
-        n_ctx=context_window
-    ),
-    # Takes too long. Might try another time
+    # Takes too long
+    # "12B_gemma_3": Llama.from_pretrained(
+    #     repo_id="MaziyarPanahi/gemma-3-12b-it-GGUF",
+    #     filename="gemma-3-12b-it.Q2_K.gguf",
+    #     verbose=verbose_param,
+    #     n_ctx=context_window
+    # ),
+    # "9B_qwen_3.5_unsloth": Llama.from_pretrained(
+    #     repo_id="Qwen/Qwen3-8B-GGUF",
+    #     filename="Qwen3-8B-Q4_K_M.gguf",
+    #     verbose=verbose_param,
+    #     n_ctx=context_window
+    # ),
+    # Takes too long
     # "8B_deepseek_unsloth": Llama.from_pretrained(
     #     repo_id="unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF",
     #     filename="DeepSeek-R1-0528-Qwen3-8B-BF16.gguf",
@@ -87,25 +88,24 @@ def chat_completion_benchmark(model: str, content: str):
         ],
         stream=False
     )
-    elapsed_time = time.perf_counter() - start_time
+    chat_completion_time = time.perf_counter() - start_time
 
     response = chat_completion["choices"][0]["message"]["content"]
     print("Response: ", response)
 
     usage = chat_completion["usage"]
-    tps = usage["completion_tokens"] / elapsed_time # Tokens per second: Double check if you should use `total_tokens` instead
+    tps = usage["completion_tokens"] / chat_completion_time # Tokens per second: Double check if you should use `total_tokens` instead
     print("Tokens per second: ", tps)
-    print("Total processing time: ", elapsed_time, "\n\n")
+    print("Total processing time: ", chat_completion_time, "\n\n")
 
     results = pd.DataFrame({"model": [model],
-        "elapsed_time": [elapsed_time],
+        "chat_completion_time": [chat_completion_time],
         "tokens_per_second": tps,
         "prompt_tokens": usage["prompt_tokens"],
         "completion_tokens": usage["completion_tokens"],
         "total_tokens": usage["total_tokens"],
         "prompt": content,
         "response": response})
-
 
     return results
 
