@@ -129,9 +129,5 @@ for model in models:
 benchmarks = pd.concat(all_results, ignore_index=True)
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
-
-with open(output_path, "w") as f:
-    json.dump(benchmarks, f, indent=2)
-print("Done. Benchmarks have been saved to ", benchmark_dir)
-print("Total models tested: ", len(models))
+bencharks_output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
+benchmarks.to_csv(bencharks_output_path)
