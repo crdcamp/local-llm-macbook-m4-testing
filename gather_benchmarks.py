@@ -4,9 +4,9 @@ import os
 import time
 import json
 from datetime import datetime
-import tqdm
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=downloads
+# Models can be deleted in ~/.cache/huggingface/hub/
 
 # %% Define folder and file structure
 benchmark_dir = "benchmarks"
@@ -47,12 +47,13 @@ models = {
         verbose=verbose_param,
         n_ctx=context_window
     ),
-    "8B_deepseek_unsloth": Llama.from_pretrained(
-        repo_id="unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF",
-        filename="DeepSeek-R1-0528-Qwen3-8B-BF16.gguf",
-        verbose=verbose_param,
-        n_ctx=context_window
-    ),
+    # Takes too long. Might try another time
+    # "8B_deepseek_unsloth": Llama.from_pretrained(
+    #     repo_id="unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF",
+    #     filename="DeepSeek-R1-0528-Qwen3-8B-BF16.gguf",
+    #     verbose=verbose_param,
+    #     n_ctx=context_window
+    # ),
     "7B_deepseek_chat_second_state": Llama.from_pretrained(
         repo_id="second-state/Deepseek-LLM-7B-Chat-GGUF",
         filename="deepseek-llm-7b-chat-Q2_K.gguf",
@@ -61,7 +62,6 @@ models = {
     )
 }
 
-print("\nNumber of models: ", len(models))
 print()
 
 # %% Chat completions benchmarks function
@@ -69,10 +69,14 @@ benchmarks = []
 
 def chat_completion_benchmark(model: str, content: str):
     # Add check for GGUF format
+    print("Current model: ", model)
+    print("Prompt: ", content)
     model_object = models[model]
     model_filename = os.path.basename(model_object.model_path)
 
     start_time = time.perf_counter()
+
+    print("Creating chat completion...")
     chat_completion = model_object.create_chat_completion(
         messages=[
             {
@@ -85,8 +89,14 @@ def chat_completion_benchmark(model: str, content: str):
     elapsed_time = time.perf_counter() - start_time
 
     response = chat_completion["choices"][0]["message"]["content"]
+    print("Response: ", response)
+
     usage = chat_completion["usage"]
     tps = usage["completion_tokens"] / elapsed_time # Tokens per second: Double check if you should use `total_tokens` instead
+    print("Tokens per second: ", tps)
+    print("Total processing time: ", elapsed_time)
+    print()
+    print()
 
     results = {
         "model": model,
@@ -105,7 +115,8 @@ def chat_completion_benchmark(model: str, content: str):
 print()
 
 # %% Call function for easy, medium, and hard prompts
-print("Running models and gathering benchmarks...")
+print("Running models and gathering benchmarks... (this will take a while)")
+print()
 for model in models:
     easy_prompt = chat_completion_benchmark(model, "What is the capital of France?")
     medium_prompt = chat_completion_benchmark(model, "Summarize the main arguments for and against nuclear energy as a solution to climate change.")
@@ -120,3 +131,4 @@ output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
 with open(output_path, "w") as f:
     json.dump(benchmarks, f, indent=2)
 print("Done. Benchmarks have been saved to ", benchmark_dir)
+print("Total models tested: ", len(models))
