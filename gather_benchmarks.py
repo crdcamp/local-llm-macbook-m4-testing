@@ -118,13 +118,15 @@ print(benchmarks)
 # %% Call function for easy, medium, and hard prompts
 print("Running models and gathering benchmarks... (this will take a while)")
 print()
-for model in models:
-    easy_prompt = chat_completion_benchmark(model, "What is the capital of France?")
-    medium_prompt = chat_completion_benchmark(model, "Summarize the main arguments for and against nuclear energy as a solution to climate change.")
-    hard_prompt = chat_completion_benchmark(model, "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?")
 
-benchmarks.sort(key=lambda x: x["tokens_per_second"], reverse=True)
-print("Benchmark Results:\n", json.dumps(benchmarks, indent=2))
+benchmarks = pd.DataFrame()
+all_results = []
+for model in models:
+    all_results.append(chat_completion_benchmark(model, "What is the capital of France?"))
+    all_results.append(chat_completion_benchmark(model, "Summarize the main arguments for and against nuclear energy as a solution to climate change."))
+    all_results.append(chat_completion_benchmark(model, "Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?"))
+
+benchmarks = pd.concat(all_results, ignore_index=True)
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
