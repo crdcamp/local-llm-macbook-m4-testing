@@ -11,6 +11,13 @@ print(benchmarks.head(2))
 This is just gonna be a rough draft for now.
 """
 benchmarks["tokens_per_second"] = benchmarks["total_tokens"] / benchmarks["chat_completion_time"]
-print(benchmarks)
+#print(benchmarks)
 output_path = "benchmarks/benchmarks_test.csv"
-benchmarks.to_csv(output_path, index=False)
+
+# %% Try grouping by prompt first
+prompt_group = benchmarks.groupby(["prompt"])
+#print(prompt_group.head())
+output_path = "testing/test.csv"
+
+# Only saves the "Captial of France" prompt
+print(prompt_group)

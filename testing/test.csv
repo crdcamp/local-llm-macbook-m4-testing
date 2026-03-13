@@ -1,0 +1,12 @@
+,model,chat_completion_time,tokens_per_second,prompt_tokens,completion_tokens,total_tokens,response
+0,0.5B_ruvltra,0.6784691249995376,48.63891190335668,26,7,33,The capital of France is Paris.
+3,8B_qwen_3,20.023419124998327,10.887251504806036,15,203,218,"<think>
+Okay, the user is asking for the capital of France. Let me think. I know that France is a country in Europe, and its capital is a well-known city. I remember that Paris is the capital. But wait, maybe I should double-check to make sure I'm not confusing it with another city. Let me recall some geography facts. France has several major cities like Lyon, Marseille, and Bordeaux, but the capital is definitely Paris. I think that's right. Also, Paris is famous for the Eiffel Tower, the Louvre Museum, and other landmarks. Yeah, I'm pretty confident that Paris is the correct answer. I don't think there's any other city that's considered the capital of France. So the answer should be Paris.
+</think>
+
+The capital of France is **Paris**. It is a major cultural, economic, and political center in Europe, known for landmarks such as the Eiffel Tower, the Louvre Museum, and the Seine River."
+6,9B_glm_4,5.651985625001544,3.538579417387414,12,8,20,"
+The capital of France is Paris."
+9,9B_gemma_2,7.925157124998805,3.280692053156476,16,10,26,"The capital of France is **Paris**. 
+"
+12,7B_deepseek_chat_second_state,3.796720292000827,5.531089568079097,14,7,21,The capital of France is Paris.
