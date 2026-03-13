@@ -2,13 +2,11 @@
 from llama_cpp import Llama
 import os
 import time
-import json
 from datetime import datetime
-from numpy.typing import test
 import pandas as pd
 
 # Hugging Face Search Parameters: https://huggingface.co/models?pipeline_tag=text-generation&num_parameters=min:9B,max:12B&library=gguf&apps=llama.cpp&sort=downloads
-# Models can be deleted in ~/.cache/huggingface/hub/
+# Models can be found in ~/.cache/huggingface/hub/
 
 # %% Define folder and file structure
 benchmark_dir = "benchmarks"
@@ -68,14 +66,12 @@ print()
 
 # %% Chat completions benchmarks function
 def chat_completion_benchmark(model: str, content: str):
-    # Add check for GGUF format
     print("Current model: ", model)
     print("Prompt: ", content)
     model_object = models[model]
 
-    start_time = time.perf_counter()
-
     print("Creating chat completion...")
+    start_time = time.perf_counter()
     chat_completion = model_object.create_chat_completion(
         messages=[
             {
@@ -129,5 +125,5 @@ for model in models:
 benchmarks = pd.concat(all_results, ignore_index=True)
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-bencharks_output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.json")
-benchmarks.to_csv(bencharks_output_path)
+benchmarks_output_path = os.path.join(benchmark_dir, f"benchmarks_{timestamp}.csv")
+benchmarks.to_csv(benchmarks_output_path, index=False)
