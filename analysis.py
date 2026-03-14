@@ -78,6 +78,7 @@ fig, ax = plt.subplots()
 
 benchmarks_pivot_token.plot(kind='bar', ax=ax)
 ax.set_xlabel("Prompt Difficulty")
+ax.set_xticklabels([])
 ax.set_ylabel("Total Tokens")
 
 plt.show();
@@ -86,15 +87,14 @@ output_path = 'testing/prompt_pivot_table.csv'
 benchmarks_pivot.to_csv(output_path)
 
 # %%
-print(benchmarks.columns)
 benchmarks['total_str_length'] = benchmarks['response_string_length'] + benchmarks['prompt_string_length']
-print(benchmarks['total_str_length'])
 benchmarks_pivot_str = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_str_length', sort=True)
 
 # I'll figure out how to rename the prompt columns (or just rename them up above)
 fig, ax = plt.subplots()
 benchmarks_pivot_str.plot(kind='bar', ax=ax)
 ax.set_xlabel("Prompt Difficulty")
+ax.set_xticklabels([])
 ax.set_ylabel("Total String Length")
 
 plt.ylim(0, max(benchmarks['total_str_length']))
