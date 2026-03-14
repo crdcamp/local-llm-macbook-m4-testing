@@ -1,0 +1,4 @@
+,0.5B_ruvltra,7B_deepseek_chat_second_state,8B_qwen_3,9B_gemma_2,9B_glm_4
+hard,435.0,521.0,2048.0,663.0,722.0
+medium,224.0,178.0,1070.0,413.0,654.0
+easy,33.0,21.0,218.0,26.0,20.0
