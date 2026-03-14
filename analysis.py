@@ -1,4 +1,5 @@
 # %% Imports
+from socket import INADDR_MAX_LOCAL_GROUP
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -112,15 +113,11 @@ output_path_time = 'pivot_tables/pivot_time.csv'
 
 # Find max and min for easy, difficult, and hard prompts
 pivot_tables = [benchmarks_pivot_token, benchmarks_pivot_time]
-print(benchmarks_pivot_time.max(axis=1))
-print(benchmarks_pivot_time)
-print()
-print()
-print()
 
 # Change the index values so we're not dealing with annoyingly long prompts
 # Then, apply max and min stuff
 for table in pivot_tables:
     table.index = ['hard', 'medium', 'easy']
     max_values = table.max(axis=1)
-    print(max_values)
+    max_model = table.idxmax(axis=1)  # this IS the model name
+    print(pd.DataFrame({'max_value': max_values, 'model': max_model}))
