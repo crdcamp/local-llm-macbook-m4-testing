@@ -119,5 +119,28 @@ pivot_tables = [benchmarks_pivot_token, benchmarks_pivot_time]
 for table in pivot_tables:
     table.index = ['hard', 'medium', 'easy']
     max_values = table.max(axis=1)
-    max_model = table.idxmax(axis=1)  # this IS the model name
+    max_model = table.idxmax(axis=1)  # this is the model name
+
     print(pd.DataFrame({'max_value': max_values, 'model': max_model}))
+
+    print(type(max_values), type(max_model))
+
+# %% Plot graphs next to each other
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+benchmarks_pivot_token.plot(kind='bar', ax=ax1)
+ax1.set_xlabel('Prompt Difficulty')
+ax1.set_ylabel('Total Tokens')
+
+ax1.set_xticklabels(['Hard', 'Easy', 'Medium'])
+
+ax1.set_title('Prompt Difficulty vs. Total Tokens')
+
+benchmarks_pivot_time.plot(kind='bar', ax=ax2)
+ax2.set_xlabel('Prompt Difficulty')
+ax2.set_ylabel('Total Ex Time')
+
+ax2.set_xticklabels(['Hard', 'Easy', 'Medium'])
+
+ax2.set_title('Prompt Difficulty vs. Total Ex Time')
+plt.show()
