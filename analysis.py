@@ -13,6 +13,7 @@ print(benchmarks.head())
 This is just gonna be a rough draft for now.
 """
 benchmarks["tokens_per_second"] = benchmarks["total_tokens"] / benchmarks["chat_completion_time"]
+
 #print(benchmarks)
 output_path = "benchmarks/benchmarks_test.csv"
 
@@ -59,12 +60,17 @@ plt.show();
 # Line chart for tokens vs. completion time
 
 # %% Now aggregate the bar charts (ahhhh I was actually looking for a pivot table)
+
+"""
+To Do:
+    * Order the graph below
+    * Time vs. Token usage
+    *
+"""
+benchmarks_pivot = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
+
 fig, ax = plt.subplots()
-benchmarks.pivot_table(index="prompt", columns="model", values="total_tokens").plot(kind="bar", ax=ax)
+benchmarks_pivot.plot(kind='bar', ax=ax)
 ax.set_xlabel("")
 ax.set_ylabel("Total Tokens")
-plt.tight_layout()
-plt.show()
-
-# %%
-print(prompts)
+plt.show();
