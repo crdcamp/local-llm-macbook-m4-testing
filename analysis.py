@@ -38,6 +38,7 @@ output_path = "testing/ruv_results.csv"
 benchmarks_ruv.to_csv(output_path, index=False)
 
 # %% Now graph each of the results (gonna be pretty basic to start)
+# Just kinda messing around for now... This is just testing
 
 # Bar chart for token usage
 # Show token usage for each prompt
@@ -57,4 +58,12 @@ plt.show();
 
 # Line chart for tokens vs. completion time
 
-# %% Now compile these graphs together
+# %% Now aggregate the bar charts (ahhhh I was actually looking for a pivot table)
+fig, ax = plt.subplots()
+benchmarks.pivot_table(index="prompt", columns="model", values="total_tokens").plot(kind="bar", ax=ax)
+ax.set_xlabel("")
+ax.set_xticks(range(len(prompts)))
+ax.set_xticklabels(["Easy", "Medium", "Hard"])
+ax.set_ylabel("Total Tokens")
+plt.tight_layout()
+plt.show()
