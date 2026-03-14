@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 # %% Open dat guy
 benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
 benchmarks = pd.read_csv(benchmarks_path)
-print(len(benchmarks))
-print(benchmarks.head())
+# Add string length column
+benchmarks['string_length'] = benchmarks['response'].str.len()
 
 # %% Fix the tokens/second calculation
 """
@@ -70,7 +70,9 @@ To Do:
 benchmarks_pivot = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
 
 fig, ax = plt.subplots()
+
 benchmarks_pivot.plot(kind='bar', ax=ax)
-ax.set_xlabel("")
+ax.set_xlabel("Prompt Difficulty")
 ax.set_ylabel("Total Tokens")
+
 plt.show();
