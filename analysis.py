@@ -62,8 +62,9 @@ plt.show();
 fig, ax = plt.subplots()
 benchmarks.pivot_table(index="prompt", columns="model", values="total_tokens").plot(kind="bar", ax=ax)
 ax.set_xlabel("")
-ax.set_xticks(range(len(prompts)))
-ax.set_xticklabels(["Easy", "Medium", "Hard"])
 ax.set_ylabel("Total Tokens")
 plt.tight_layout()
 plt.show()
+
+# %%
+print(prompts)
