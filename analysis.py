@@ -1,14 +1,12 @@
 # %% Imports
 import pandas as pd
 import matplotlib.pyplot as plt
+from pandas.core.reshape.pivot import pivot_table
 
 # %% Open dat guy and prepare the data
+
 benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
 benchmarks = pd.read_csv(benchmarks_path)
-
-# Add some columns that might be useful
-benchmarks['response_string_length'] = benchmarks['response'].str.len()
-benchmarks['prompt_string_length'] = benchmarks['prompt'].str.len()
 
 print(benchmarks.columns)
 
@@ -83,22 +81,7 @@ ax.set_ylabel("Total Tokens")
 
 plt.show();
 
-output_path = 'testing/prompt_pivot_table.csv'
-benchmarks_pivot.to_csv(output_path)
 
-# %%
-benchmarks['total_str_length'] = benchmarks['response_string_length'] + benchmarks['prompt_string_length']
-benchmarks_pivot_str = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_str_length', sort=True)
-
-# I'll figure out how to rename the prompt columns (or just rename them up above)
-fig, ax = plt.subplots()
-benchmarks_pivot_str.plot(kind='bar', ax=ax)
-ax.set_xlabel("Prompt Difficulty")
-ax.set_xticklabels([])
-ax.set_ylabel("Total String Length")
-
-plt.ylim(0, max(benchmarks['total_str_length']))
-
-plt.show();
-
-output_path = 'testing/prompt_pivot_table.csv'
+# %% Mmmmkay... what else can we do? Check out chat completion time?
+print(benchmarks.columns)
+benchmarks_pivot_completion_time = pd.pivot_table(benchmarks, index='prompt', columns='model', values='chat_completion_time')

@@ -1,5 +1,5 @@
-model,chat_completion_time,tokens_per_second,prompt_tokens,completion_tokens,total_tokens,prompt,response,response_string_length,prompt_string_length,tokens_per_string_length
-0.5B_ruvltra,0.6784691249995376,48.63891190335668,26,7,33,What is the capital of France?,The capital of France is Paris.,31,30,0.0009049525585476882
+model,chat_completion_time,tokens_per_second,prompt_tokens,completion_tokens,total_tokens,prompt,response
+0.5B_ruvltra,0.6784691249995376,48.63891190335668,26,7,33,What is the capital of France?,The capital of France is Paris.
 0.5B_ruvltra,1.4878859579985146,150.54917266732053,37,187,224,Summarize the main arguments for and against nuclear energy as a solution to climate change.,"The main arguments for nuclear energy as a solution to climate change are:
 
 1. Nuclear energy is a clean and renewable energy source that does not emit greenhouse gases or other pollutants.
@@ -18,7 +18,7 @@ The main arguments against nuclear energy as a solution to climate change are:
 
 3. Nuclear energy is not a sustainable source of energy, and it can be expensive and difficult to maintain.
 
-4. Nuclear energy is not a reliable source of energy, and it can be unstable.",930,92,0.006132282084975909
+4. Nuclear energy is not a reliable source of energy, and it can be unstable."
 0.5B_ruvltra,3.2943810839969956,132.04301169439228,46,389,435,"Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?","Bayesian statistics and frequentist statistics are two different approaches to statistical inference that differ in their approach to the uncertainty in the results of statistical tests. While both approaches rely on the use of probability theory, they differ in their approach to the uncertainty in the results of statistical tests.
 
 Bayesian statistics is based on the idea that the results of a statistical test are not random but are determined by the prior probabilities of the variables under consideration. In Bayesian statistics, the prior probabilities are assumed to be fixed and cannot be changed. This means that the results of a statistical test are not random and can be influenced by the prior probabilities.
@@ -27,4 +27,4 @@ On the other hand, frequentist statistics is based on the idea that the results 
 
 Where do they genuinely disagree is in the way they approach the uncertainty in the results of statistical tests. Bayesian statistics assumes that the results of a statistical test are random and can be influenced by the prior probabilities, while frequentist statistics assumes that the results of a statistical test are determined by the likelihood function of the data. This means that Bayesian statistics can provide a more accurate estimate of the probability of a test result, while frequentist statistics can provide a more accurate estimate of the likelihood of the data.
 
-The disagreement is mostly philosophical, as the two approaches differ in their approach to the uncertainty in the results of statistical tests. While Bayesian statistics is based on the idea that the results of a statistical test are random and can be influenced by the prior probabilities, frequentist statistics is based on the idea that the results of a statistical test are determined by the likelihood function of the data.",2253,165,0.011884921177017022
+The disagreement is mostly philosophical, as the two approaches differ in their approach to the uncertainty in the results of statistical tests. While Bayesian statistics is based on the idea that the results of a statistical test are random and can be influenced by the prior probabilities, frequentist statistics is based on the idea that the results of a statistical test are determined by the likelihood function of the data."
