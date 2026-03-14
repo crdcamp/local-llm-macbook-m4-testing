@@ -85,3 +85,11 @@ plt.show();
 # %% Mmmmkay... what else can we do? Check out chat completion time?
 print(benchmarks.columns)
 benchmarks_pivot_completion_time = pd.pivot_table(benchmarks, index='prompt', columns='model', values='chat_completion_time')
+fig, ax = plt.subplots()
+
+benchmarks_pivot_completion_time.plot(kind='bar', ax=ax)
+ax.set_xlabel("Prompt Difficulty")
+ax.set_xticklabels([])
+ax.set_ylabel("Completion Time")
+
+plt.show();
