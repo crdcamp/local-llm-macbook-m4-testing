@@ -2,12 +2,17 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# %% Open dat guy
+# %% Open dat guy and prepare the data
 benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
 benchmarks = pd.read_csv(benchmarks_path)
-# Add string length column
+
+# Add some columns that might be useful
 benchmarks['response_string_length'] = benchmarks['response'].str.len()
 benchmarks['prompt_string_length'] = benchmarks['prompt'].str.len()
+benchmarks['tokens_per_string_length'] = benchmarks['total_tokens'] / sum(benchmarks['response_string_length'], benchmarks["prompt_string_length"])
+benchmarks['']
+
+print(benchmarks.columns)
 
 # %% Fix the tokens/second calculation
 """
@@ -70,6 +75,7 @@ To Do:
 """
 benchmarks_pivot = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
 
+# I'll figure out how to rename the prompt columns (or just rename them up above)
 fig, ax = plt.subplots()
 
 benchmarks_pivot.plot(kind='bar', ax=ax)
@@ -77,3 +83,11 @@ ax.set_xlabel("Prompt Difficulty")
 ax.set_ylabel("Total Tokens")
 
 plt.show();
+
+output_path = 'testing/prompt_pivot_table.csv'
+benchmarks_pivot.to_csv(output_path)
+
+# %% Scatter plots
+print(benchmarks.head())
+output_path = 'testing/new_benchmarks_table.csv'
+benchmarks.to_csv(output_path, index=False)
