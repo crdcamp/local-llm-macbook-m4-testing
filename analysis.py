@@ -9,8 +9,6 @@ benchmarks = pd.read_csv(benchmarks_path)
 # Add some columns that might be useful
 benchmarks['response_string_length'] = benchmarks['response'].str.len()
 benchmarks['prompt_string_length'] = benchmarks['prompt'].str.len()
-benchmarks['tokens_per_string_length'] = benchmarks['total_tokens'] / sum(benchmarks['response_string_length'], benchmarks["prompt_string_length"])
-benchmarks['']
 
 print(benchmarks.columns)
 
@@ -73,12 +71,12 @@ To Do:
     * Time vs. Token usage
     *
 """
-benchmarks_pivot = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
+benchmarks_pivot_token = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
 
 # I'll figure out how to rename the prompt columns (or just rename them up above)
 fig, ax = plt.subplots()
 
-benchmarks_pivot.plot(kind='bar', ax=ax)
+benchmarks_pivot_token.plot(kind='bar', ax=ax)
 ax.set_xlabel("Prompt Difficulty")
 ax.set_ylabel("Total Tokens")
 
@@ -87,7 +85,20 @@ plt.show();
 output_path = 'testing/prompt_pivot_table.csv'
 benchmarks_pivot.to_csv(output_path)
 
-# %% Scatter plots
-print(benchmarks.head())
-output_path = 'testing/new_benchmarks_table.csv'
-benchmarks.to_csv(output_path, index=False)
+# %%
+print(benchmarks.columns)
+benchmarks['total_str_length'] = benchmarks['response_string_length'] + benchmarks['prompt_string_length']
+print(benchmarks['total_str_length'])
+benchmarks_pivot_str = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_str_length', sort=True)
+
+# I'll figure out how to rename the prompt columns (or just rename them up above)
+fig, ax = plt.subplots()
+benchmarks_pivot_str.plot(kind='bar', ax=ax)
+ax.set_xlabel("Prompt Difficulty")
+ax.set_ylabel("Total String Length")
+
+plt.ylim(0, max(benchmarks['total_str_length']))
+
+plt.show();
+
+output_path = 'testing/prompt_pivot_table.csv'

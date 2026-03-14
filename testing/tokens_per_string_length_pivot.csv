@@ -1,0 +1,4 @@
+prompt,0.5B_ruvltra,7B_deepseek_chat_second_state,8B_qwen_3,9B_gemma_2,9B_glm_4
+"Compare the epistemological foundations of Bayesian and frequentist statistics. Where do they genuinely disagree, and where is the disagreement mostly philosophical?",0.011884921177017022,0.014234583754542226,0.0559547553345537,0.018114259173246633,0.019726236988060437
+Summarize the main arguments for and against nuclear energy as a solution to climate change.,0.006132282084975909,0.004872974156811214,0.029292597459483136,0.011306395094174332,0.01790407358738502
+What is the capital of France?,0.0009049525585476882,0.0005758789008939835,0.005978171447375637,0.0007129929249163605,0.000548456096089508
