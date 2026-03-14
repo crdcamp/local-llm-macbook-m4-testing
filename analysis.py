@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
 benchmarks = pd.read_csv(benchmarks_path)
 # Add string length column
-benchmarks['string_length'] = benchmarks['response'].str.len()
+benchmarks['response_string_length'] = benchmarks['response'].str.len()
+benchmarks['prompt_string_length'] = benchmarks['prompt'].str.len()
 
 # %% Fix the tokens/second calculation
 """
