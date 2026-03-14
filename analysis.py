@@ -1,7 +1,6 @@
 # %% Imports
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas.core.reshape.pivot import pivot, pivot_table
 
 """
 OMG THIS CODE IS SUCH A MESS IT DOESN'T MATTER FOR THIS PART THOUGH
@@ -100,7 +99,7 @@ ax.set_title('Prompt Difficulty vs. Completion Time')
 
 plt.show();
 
-ß# %% Now let's find out the min and max values from these 2 pivot tables
+# %% Now let's find out the min and max values from these 2 pivot tables
 # print("Token Pivot Table Columns:\n", benchmarks_pivot_token.columns, "\n\n")
 # print("Completion Time Pivot Table Columns:\n", benchmarks_pivot_token.columns, "\n\n")
 
@@ -113,13 +112,15 @@ output_path_time = 'pivot_tables/pivot_time.csv'
 
 # Find max and min for easy, difficult, and hard prompts
 pivot_tables = [benchmarks_pivot_token, benchmarks_pivot_time]
+print(benchmarks_pivot_time.max(axis=1))
+print(benchmarks_pivot_time)
+print()
+print()
+print()
 
 # Change the index values so we're not dealing with annoyingly long prompts
 # Then, apply max and min stuff
-for prompt in pivot_tables:
-    prompt.index = ['hard', 'medium', 'easy']
-
-
-
-#benchmarks_pivot_token.to_csv('benchmarks_token_relabeled.csv')
-#benchmarks_pivot_time.to_csv('benchmarks_time_relabeled.csv')
+for table in pivot_tables:
+    table.index = ['hard', 'medium', 'easy']
+    max_values = table.max(axis=1)
+    print(max_values)
