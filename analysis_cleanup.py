@@ -10,14 +10,12 @@ print(benchmarks.columns)
 # Fix tokens per second calculation
 benchmarks['tokens_per_second'] = benchmarks["total_tokens"] / benchmarks['chat_completion_time']
 
-# Create "easy, medium", and "hard" prompt assignments
-# We'll move the prompts into a more centralized space another time
-
-# %% Pivot Tables
+# %% Create pivot tables
 benchmarks_pivot_tokens = pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True)
 benchmarks_pivot_time = pd.pivot(benchmarks, index='prompt', columns='model', values='chat_completion_time')
 
 
+# %% Graphing pivot tables
 # This is a sketchy way to plot but we'll fix that in the next project
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
@@ -37,3 +35,6 @@ ax2.set_xticklabels(['Hard', 'Easy', 'Medium'])
 
 ax2.set_title('Prompt Difficulty vs. Chat Completion Time')
 plt.show()
+
+# %% Now we should calculate ratios or something between these....
+# Let's look into interpreting pivot tables before continuing
