@@ -1,5 +1,4 @@
 # %% Imports
-from socket import INADDR_MAX_LOCAL_GROUP
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -138,9 +137,9 @@ ax1.set_title('Prompt Difficulty vs. Total Tokens')
 
 benchmarks_pivot_time.plot(kind='bar', ax=ax2)
 ax2.set_xlabel('Prompt Difficulty')
-ax2.set_ylabel('Total Ex Time')
+ax2.set_ylabel('Chat Completion Time')
 
 ax2.set_xticklabels(['Hard', 'Easy', 'Medium'])
 
-ax2.set_title('Prompt Difficulty vs. Total Ex Time')
+ax2.set_title('Prompt Difficulty vs. Chat Completion Time')
 plt.show()
