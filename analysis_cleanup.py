@@ -36,6 +36,7 @@ ax2.set_xticklabels(['Hard', 'Easy', 'Medium'])
 ax2.set_title('Prompt Difficulty vs. Chat Completion Time')
 
 # Prompt Difficulty vs. Tokens/Second
+# (This graph might be useless)
 benchmarks_pivot_tps.plot(kind='bar', ax=ax3)
 ax3.set_title('Prompt Difficulty vs. Tokens/Second')
 ax3.set_xlabel('Prompt Difficulty')
