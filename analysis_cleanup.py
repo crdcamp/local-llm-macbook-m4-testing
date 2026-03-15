@@ -51,8 +51,7 @@ plt.show()
 # Let's look into interpreting pivot tables before continuing
 # Maybe calculate the token to chat completion time ratio in some way???? (That's literally tokens/second dummy)
 
-# ......... Let's remove the Qwen model since I didn't even give it enough context to
-#... I'm assuming... run properly
+# ......... Let's remove the Qwen model since I didn't even give it enough context to... I'm assuming... run properly
 
 # %% Pivot table dict
 pivot_tables = {
@@ -61,6 +60,33 @@ pivot_tables = {
     "tpd": pd.pivot(benchmarks, index='prompt', columns='model', values='tokens_per_second')
 }
 
+print(pivot_tables['tokens'].columns)
 for key, value in pivot_tables.items():
-    pivot_tables[key] = pivot_tables[key].drop('8B_qwen_3', axis=1)
-    value = value.drop('8B_qwen_3', axis=1)
+    pivot_tables[key] = pivot_tables[key].drop(['8B_qwen_3', '0.5B_ruvltra'], axis=1)
+
+# Should really make a function for this
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(14, 6));
+
+pivot_tables['tokens'].plot(kind='bar', ax=ax1)
+ax1.set_xlabel('Prompt Difficulty')
+ax1.set_ylabel('Total Tokens')
+ax1.set_xticklabels(['Hard', 'Easy', 'Medium'])
+ax1.set_title('Prompt Difficulty vs. Total Tokens')
+
+# Prompt Difficulty vs. Chat Completion Time
+pivot_tables['time'].plot(kind='bar', ax=ax2)
+ax2.set_xlabel('Prompt Difficulty')
+ax2.set_ylabel('Chat Completion Time')
+ax2.set_xticklabels(['Hard', 'Easy', 'Medium'])
+ax2.set_title('Prompt Difficulty vs. Chat Completion Time')
+
+# Prompt Difficulty vs. Tokens/Second
+# (This graph might be useless)
+pivot_tables['tpd'].plot(kind='bar', ax=ax3)
+ax3.set_title('Prompt Difficulty vs. Tokens/Second')
+ax3.set_xlabel('Prompt Difficulty')
+ax3.set_ylabel('Tokens/Second')
+ax3.set_xticklabels(['Hard', 'Easy', 'Medium'])
+ax3.set_title('Prompt Difficulty vs. TPS')
+
+plt.plot();
