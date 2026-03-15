@@ -1,6 +1,7 @@
 # %% Imports
 import pandas as pd
 import matplotlib.pyplot as plt
+from pandas.core.reshape.pivot import pivot_table
 
 # %% Open (We'll get this in a better state later for file management)
 benchmarks_path = "benchmarks/benchmarks_20260313_155955.csv"
@@ -49,3 +50,17 @@ plt.show()
 # %% Now we should calculate ratios or something between these....
 # Let's look into interpreting pivot tables before continuing
 # Maybe calculate the token to chat completion time ratio in some way???? (That's literally tokens/second dummy)
+
+# ......... Let's remove the Qwen model since I didn't even give it enough context to
+#... I'm assuming... run properly
+
+# %% Pivot table dict
+pivot_tables = {
+    "tokens": pd.pivot_table(benchmarks, index='prompt', columns='model', values='total_tokens', sort=True),
+    "time": pd.pivot(benchmarks, index='prompt', columns='model', values='chat_completion_time'),
+    "tpd": pd.pivot(benchmarks, index='prompt', columns='model', values='tokens_per_second')
+}
+
+for key, value in pivot_tables.items():
+    pivot_tables[key] = pivot_tables[key].drop('8B_qwen_3', axis=1)
+    value = value.drop('8B_qwen_3', axis=1)
